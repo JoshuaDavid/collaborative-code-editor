@@ -1,0 +1,81 @@
+body {
+    overflow: hidden;
+    margin: 0;
+}
+h1 {
+    font-size: 18px;
+    font-family: Arial;
+    text-align: center;
+    color: #F9EE98;
+    background: #232323;
+    margin: 0;
+    padding: 0;
+}
+#left {
+    position: absolute;
+    width: 40%;
+    height: 100%;
+    left: 0;
+    top:0
+}
+#html-wrap,
+#css-wrap,
+#js-wrap {
+    position: relative;
+    height: 33.33%;
+    margin: 0;
+}
+
+#html-editor,
+#css-editor,
+#js-editor {
+    margin: 0;
+    position: absolute;
+    top: 20px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+#right {
+    position: absolute;
+    width: 60%;
+    height: 100%;
+    right: 0;
+    top: 0;
+}
+
+#result {
+    height: 60%;
+    width: 100%;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+#result iframe {
+    height: 100%;
+    width: 100%;
+}
+
+#share input {
+    width: 50em;
+}
+
+button {
+    height: 3em;
+    width: 5em;
+    border-radius: 0.5em;
+    border: 4px outset blue;
+    background: lightblue;
+    font-weight: bold;
+    font-color: white;
+    text-shadow: 1px  1px white,
+                 1px -1px white,
+                -1px  1px white, 
+                -1px -1px white;
+}
+
+button#save {
+    border-color: green;
+    background: lightgreen;
+}

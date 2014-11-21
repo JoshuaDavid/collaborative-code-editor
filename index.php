@@ -13,6 +13,20 @@ if(!empty($_GET["project"])) {
         $project .= $b52_chars[mt_rand(0, 51)];
     }
 }
+$html = <<<HTML
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Web Page</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <h1>Web Page</h1>
+        <script src="main.js"></script>
+    </body>
+</html>
+HTML;
 ?>
 <html>
     <head>
@@ -20,6 +34,7 @@ if(!empty($_GET["project"])) {
         <script src="ace/src-noconflict/ace.js"></script>
         <script src="main.js"></script>
         <link rel="stylesheet" href="styles.css" type="text/css" />
+        <title>Collaborative Webpage Editor</title>
     </head>
     <body>
         <header>
@@ -30,8 +45,9 @@ if(!empty($_GET["project"])) {
             <div id="left">
                 <div id="html-wrap">
                     <h1>Write HTML Here (index.html)</h1>
-                    <code id="html-editor">
-                    </code>
+                    <code id="html-editor"><?php 
+                        echo htmlentities($html); 
+                  ?></code>
                 </div>
                 <div id="js-wrap">
                     <h1>Write JavaScript Code Here (main.js)</h1>
@@ -56,6 +72,7 @@ if(!empty($_GET["project"])) {
                     <button id="sync">Sync (pull)</button>
                 </div>
                 <div id="result">
+                    <div id="titlebar"></div>
                     <iframe src="about:blank"></iframe>
                 </div>
                 <div id="console">

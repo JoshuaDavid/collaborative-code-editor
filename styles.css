@@ -1,13 +1,15 @@
 body {
     overflow: hidden;
     margin: 0;
+    background: #232323;
+    color: white;
+    font-family: Arial;
 }
 h1 {
     font-size: 18px;
     font-family: Arial;
     text-align: center;
     color: #F9EE98;
-    background: #232323;
     margin: 0;
     padding: 0;
 }
@@ -48,25 +50,42 @@ h1 {
 #result {
     height: 60%;
     width: 100%;
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
+    position: relative;
+}
+
+#result #titlebar {
+    height: 5%;
+    width: 90%;
+    margin-left: 5%;
+    border: 1px solid black;
+    border-bottom: 0px;
+    background: #777777;
+    text-align: center;
+    font-weight: bold;
 }
 
 #result iframe {
-    height: 100%;
-    width: 100%;
+    height: 90%;
+    width: 90%;
+    margin-left: 5%;
+    background: white;
+    border: 1px solid black;
 }
 
 #share input {
     width: 50em;
 }
 
+#actions {
+
+}
+
 button {
     height: 3em;
     width: 5em;
     border-radius: 0.5em;
-    border: 4px outset blue;
-    background: lightblue;
+    margin: 0.5em;
+    background: #9B859D;
     font-weight: bold;
     font-color: white;
     text-shadow: 1px  1px white,
@@ -76,6 +95,6 @@ button {
 }
 
 button#save {
-    border-color: green;
-    background: lightgreen;
+    border-color: #F9EE98;
+    background: #F9EE98;
 }

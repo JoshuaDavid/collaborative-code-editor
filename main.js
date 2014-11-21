@@ -18,8 +18,10 @@ $(document).ready(function() {
     var project    = $('#project').val();
 
     function showResult() {
-        console.log("showing");
         $('#result iframe').attr('src', "get_page.php?project=" + project);
+        $('iframe').load(function() {
+            $('#result #titlebar').html($('iframe')[0].contentDocument.title);
+        });
     }
 
     function sync() {

@@ -9,7 +9,8 @@ h1 {
     font-size: 18px;
     font-family: Arial;
     text-align: center;
-    color: #F9EE98;
+    color: #232323;
+    background: #F9EE98;
     margin: 0;
     padding: 0;
 }
@@ -64,12 +65,17 @@ h1 {
     font-weight: bold;
 }
 
-#result iframe {
+#iframe-container {
+    margin-left: 5%;
     height: 90%;
     width: 90%;
-    margin-left: 5%;
+}
+
+#result iframe {
     background: white;
     border: 1px solid black;
+    height: 100%;
+    width: 100%;
 }
 
 #share input {
@@ -77,7 +83,8 @@ h1 {
 }
 
 #actions {
-
+    margin-left: 5%;
+    margin-right: 5%;
 }
 
 button {
@@ -97,4 +104,17 @@ button {
 button#save {
     border-color: #F9EE98;
     background: #F9EE98;
+}
+
+#console {
+    width: 90%;
+    left: 5%;
+    height: 30%;
+    position: relative;
+}
+
+#console-inner {
+    height: 100%;
+    width: 100%;
+    position: absolute;
 }

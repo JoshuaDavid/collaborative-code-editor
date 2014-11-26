@@ -20,7 +20,32 @@ $(document).ready(function() {
     function showResult() {
         $('#result iframe').attr('src', "get_page.php?project=" + project);
         $('iframe').load(function() {
-            $('#result #titlebar').html($('iframe')[0].contentDocument.title);
+            // Make the result stuff global
+            window.resultWindow = $('#result iframe')[0].contentWindow;
+            window.resultDocument = $('#result iframe')[0].contentDocument;
+            // Make sure the title changes as appropriate
+            var lastTitle = "";
+            setInterval(function showTitle() { 
+                if(resultDocument.title != lastTitle) {
+                    $('#result #titlebar').html(resultDocument.title);
+                    lastTitle = resultDocument.title;
+                }
+            }, 100);
+            var $firebug = $("<script/>");
+            $firebug.appendTo(resultDocument.head);
+            $firebug.attr("src", "firebug-lite/firebug-lite.js");
+            function initFirebug() {
+                if(resultWindow.firebug) {
+                    resultWindow.firebug.init();
+                    //resultWindow.firebug.win.minimize();
+                    $(resultDocument).find('#Firebug, #FirebugIFrame').appendTo("#console-inner");
+                    setConsoleSize();
+
+                } else {
+                    setTimeout(initFirebug, 100);
+                }
+            }
+            initFirebug();
         });
     }
 
@@ -66,9 +91,54 @@ $(document).ready(function() {
         });
     }
 
-    sync();
+    sync()
+    // setTimeout(save, 1500);
     showResult();
     $('#save').click(save);
     $('#sync').click(sync);
+
+
 });
+
+function setConsoleSize() {
+    /*
+    $('#Firebug, #FirebugIFrame').css({
+        "left": "auto",
+        "position": "relative !important",
+    });
+    */
+    resultWindow.firebug.win.setHeight($('#console-inner').height() - 50);
+    $('#Firebug').width($("#console-inner").width());
+    $('#Firebug').height($("#console-inner").height());
+    $('#FirebugIFrame').width($("#console-inner").width());
+    $('#FirebugIFrame').height($("#console-inner").height());
+}
+
+function setIFrameSize(height, width) {
+    var viewHeight = $('#iframe-container').height();
+    var viewWidth  = $('#iframe-container').width();
+
+    $iframe = $('#result iframe');
+
+    // Aspect Ratio
+    ar = width / height;
+    viewAR = viewWidth / viewHeight;
+    if(viewHeight >= height && viewWidth >= width) {
+        // No zoom is required -- we can directly scale the iframe
+        setIFrameScale(1.0);
+        $iframe.height(height);
+        $iframe.width(width);
+    }
+    setTimeout(setConsoleSize, 100);
+}
+function setIFrameScale(scaleFactor) {
+    $('#result iframe').css({
+        '-webkit-transform': 'scale(' + scaleFactor + ')',
+        '-webkit-transform origin': '0 0',
+        '-moz-transform': 'scale(' + scaleFactor + ')',
+        '-moz-transform origin': '0 0',
+        '-o-transform': 'scale(' + scaleFactor + ')',
+        '-o-transform origin': '0 0',
+    });
+}
 

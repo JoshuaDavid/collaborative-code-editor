@@ -14,6 +14,7 @@ $stmt->execute();
 $row = $stmt->fetchAll();
 
 if(!empty($_GET["json"])) {
+    $row[0]["project"] = $project;
     echo json_encode($row[0]);
 } else if(!empty($_GET["part"])) {
     if($_GET["part"] == "javascript") {

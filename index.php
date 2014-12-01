@@ -116,11 +116,26 @@ css;
                 <div id="actions">
                     <button id="save">Save (push)</button>
                     <button id="sync">Sync (pull)</button>
+                    <div id="height-control">
+                        <div id="height-control-left">
+                            <div>
+                                <label for="width">Width:</label>
+                                <input type="text" id="width">
+                            </div>
+                            <div>
+                                <label for="height">Height:</label>
+                                <input type="text" id="height">
+                            </div>
+                        </div>
+                        <button id="resize">Resize</button>
+                    </div>
                 </div>
                 <div id="result">
-                    <div id="titlebar"></div>
-                    <div id="iframe-container">
-                        <iframe src="about:blank"></iframe>
+                    <div id="mock-browser">
+                        <div id="titlebar"></div>
+                        <div id="iframe-container">
+                            <iframe src="about:blank"></iframe>
+                        </div>
                     </div>
                 </div>
                 <div id="console">

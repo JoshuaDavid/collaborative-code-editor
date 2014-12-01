@@ -118,3 +118,9 @@ button#save {
     width: 100%;
     position: absolute;
 }
+#height-control {
+    display: inline-block;
+}
+#height-control-left {
+    display: inline-block;
+}

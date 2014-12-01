@@ -13,6 +13,12 @@ $(document).ready(function() {
     html_editor.setTheme("ace/theme/twilight");
     html_editor.getSession().setMode("ace/mode/html");
     //html_editor.on("change", save);
+    
+    $('#height').val($('#iframe-container').height());
+    $('#width').val($('#iframe-container').width());
+    $('#resize').click(function() {
+        setIFrameSize($('#width').val(), $('#height').val());
+    });
 
     var lastSave = 0;
     var project    = $('#project').val();
@@ -107,14 +113,14 @@ function setConsoleSize() {
         "position": "relative !important",
     });
     */
-    resultWindow.firebug.win.setHeight($('#console-inner').height() - 50);
+    resultWindow.firebug.win.setHeight($('#console-inner').height() * 0.9);
     $('#Firebug').width($("#console-inner").width());
     $('#Firebug').height($("#console-inner").height());
     $('#FirebugIFrame').width($("#console-inner").width());
     $('#FirebugIFrame').height($("#console-inner").height());
 }
 
-function setIFrameSize(height, width) {
+function setIFrameSize(width, height) {
     var viewHeight = $('#iframe-container').height();
     var viewWidth  = $('#iframe-container').width();
 
@@ -126,19 +132,27 @@ function setIFrameSize(height, width) {
     if(viewHeight >= height && viewWidth >= width) {
         // No zoom is required -- we can directly scale the iframe
         setIFrameScale(1.0);
-        $iframe.height(height);
-        $iframe.width(width);
+    } else if(ar > viewAR) {
+        // Width is the limiting factor
+        var scale = viewWidth / width;
+        setIFrameScale(scale);
+    } else {
+        // Height is the limiting factor.
+        var scale = viewHeight / height;
+        setIFrameScale(scale);
     }
+    $iframe.height(height);
+    $iframe.width(width);
     setTimeout(setConsoleSize, 100);
 }
 function setIFrameScale(scaleFactor) {
     $('#result iframe').css({
         '-webkit-transform': 'scale(' + scaleFactor + ')',
-        '-webkit-transform origin': '0 0',
+        '-webkit-transform-origin': '0 0',
         '-moz-transform': 'scale(' + scaleFactor + ')',
-        '-moz-transform origin': '0 0',
+        '-moz-transform-origin': '0 0',
         '-o-transform': 'scale(' + scaleFactor + ')',
-        '-o-transform origin': '0 0',
+        '-o-transform-origin': '0 0',
     });
 }
 
